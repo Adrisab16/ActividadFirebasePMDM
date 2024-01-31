@@ -41,6 +41,9 @@ import com.example.makeitso.theme.MakeItSoTheme
 fun TasksScreen(
   openScreen: (String) -> Unit,
   viewModel: TasksViewModel = hiltViewModel()
+  val tasks = viewModel
+    .tasks
+    .collectAsStateWithLifecycle(emptyList())
 ) {
   TasksScreenContent(
     onAddClick = viewModel::onAddClick,
@@ -87,13 +90,8 @@ fun TasksScreenContent(
       Spacer(modifier = Modifier.smallSpacer())
 
       LazyColumn {
-        items(emptyList<Task>(), key = { it.id }) { taskItem ->
-          TaskItem(
-            task = taskItem,
-            options = listOf(),
-            onCheckChange = { onTaskCheckChange(taskItem) },
-            onActionClick = { action -> onTaskActionClick(openScreen, taskItem, action) }
-          )
+        items(tasks.value, key = { it.id }) { taskItem ->
+          TaskItem( [...] )
         }
       }
     }
