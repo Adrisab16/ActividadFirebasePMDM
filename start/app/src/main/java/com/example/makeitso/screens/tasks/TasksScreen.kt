@@ -89,9 +89,14 @@ fun TasksScreenContent(
 
       Spacer(modifier = Modifier.smallSpacer())
 
+      val options by viewModel.options
+
       LazyColumn {
         items(tasks.value, key = { it.id }) { taskItem ->
-          TaskItem( [...] )
+          TaskItem(
+            options = options,
+            [...]
+          )
         }
       }
     }
