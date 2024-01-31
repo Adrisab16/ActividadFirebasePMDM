@@ -141,7 +141,9 @@ private fun DeleteMyAccountCard(deleteMyAccount: () -> Unit) {
 @ExperimentalMaterialApi
 @Composable
 fun SettingsScreenPreview() {
-  val uiState = SettingsUiState(isAnonymousAccount = false)
+  val uiState by viewModel.uiState.collectAsState(
+    initial = SettingsUiState(false)
+  )
 
   MakeItSoTheme {
     SettingsScreenContent(
